@@ -1,0 +1,27 @@
+@import '~rsuite/styles/less/index';
+
+@import '../components/Frame/styles.less';
+@import '../components/ErrorPage/styles.less';
+@import '../components/HeaderAvatar/styles.less';
+@import '../routes/dashboard/styles.less';
+
+//rewrite base color
+@base-color: #34c3ff;
+
+body {
+  background: #f7f7fa;
+}
+
+.rs-sidebar {
+  position: fixed;
+  height: 100vh;
+  z-index: 3;
+}
+.page-container {
+  padding-left: 260px;
+  transition: padding 0.5s;
+  background: #fff;
+  &.container-full {
+    padding-left: 60px;
+  }
+}
