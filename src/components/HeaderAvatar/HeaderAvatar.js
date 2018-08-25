@@ -1,7 +1,7 @@
 //@flow
 
 import * as React from 'react';
-import { Dropdown, Popover, Whisper, Icon } from 'rsuite';
+import { Dropdown, Popover, Whisper, Icon, Button } from 'rsuite';
 
 const Menu = ({ onSelect }) => (
   <Dropdown.Menu onSelect={onSelect}>
@@ -37,16 +37,14 @@ class HeaderAvatar extends React.Component<Props> {
   render() {
     return (
       <div className="header-avatar">
-        <Whisper
-          placement="bottomRight"
-          trigger="click"
-          triggerRef={ref => {
-            this.trigger = ref;
-          }}
-          speaker={<MenuPopover onSelect={this.handleSelectMenu} />}
+        <Button
+          componentClass="a"
+          appearance="ghost"
+          href="https://wakatime.com/dashboard"
+          target="_blank"
         >
-          <Icon icon="user-circle-o" size="lg" />
-        </Whisper>
+          Wakatime Dashboard
+        </Button>
       </div>
     );
   }

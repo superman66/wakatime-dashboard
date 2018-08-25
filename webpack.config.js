@@ -16,7 +16,7 @@ module.exports = {
     historyApiFallback: true,
     compress: true,
     host: '0.0.0.0',
-    port: 3000
+    port: 3900
   },
   entry: {
     polyfills: './src/polyfills.js',
@@ -93,7 +93,7 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn|en-gb/),
     new webpack.NamedModulesPlugin(),
     new HtmlwebpackPlugin({
-      title: 'RSUITE | A suite of React components',
+      title: 'Wakatime Dashboard',
       chunks: ['polyfills', 'commons', 'app'],
       template: 'src/index.html',
       inject: true

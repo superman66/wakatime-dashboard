@@ -48,7 +48,7 @@ class Frame extends React.Component<Props, State> {
     super(props);
     this.state = {
       windowHeight: getHeight(window),
-      expand: true
+      expand: false
     };
     this.resizeListenner = on(window, 'resize', this.updateHeight);
   }
@@ -138,8 +138,7 @@ class Frame extends React.Component<Props, State> {
           <Sidenav.Header>
             <div className="header-hrand">
               <Link to="/">
-                <Icon icon="logo-analytics" size="lg" style={{ verticalAlign: 0 }} />
-                <span style={{ marginLeft: 12 }}> WAKATIME </span>
+                <img src="/logo.png" alt="wakatime dashboard"/>
               </Link>
             </div>
           </Sidenav.Header>
