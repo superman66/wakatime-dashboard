@@ -17,6 +17,7 @@ import {
 } from 'bizcharts';
 import moment from 'moment';
 import DataSet from '@antv/data-set';
+import { secondsFormat } from '../../utils/utils';
 
 const propTypes = {
   chartData: PropTypes.array
@@ -48,7 +49,7 @@ class StackedColumnChart extends React.Component {
         if (projectContainer[project.name]) {
           projectContainer[project.name][currentDate] = hours;
         } else {
-          // 不存在的话，则新家
+          // 不存在的话,则新加
           projectContainer[project.name] = {
             name: project.name,
             [currentDate]: project.total_seconds / 3600
@@ -71,15 +72,27 @@ class StackedColumnChart extends React.Component {
       // 展开字段集
       key: 'key',
       // key字段
-      value: 'value' // value字段
+      value: 'value', // value字段
+      retains: ['name']
     });
     return (
       <div>
-        <Chart height={400} data={dv} forceFit>
-          <Legend />
+        <Chart
+          height={400}
+          data={dv}
+          forceFit
+          onTooltipChange={ev => {
+            var items = ev.items; // tooltip显示的项
+            const sum = secondsFormat(items.reduce((x, y) => x + parseFloat(y.value * 3600, 0), 0));
+            items.forEach(item => {
+              item.title = `${item.title} Total: ${sum}`;
+              item.value = secondsFormat(+item.value * 3600);
+            });
+          }}
+        >
           <Axis name="key" />
           <Axis name="value" />
-          <Tooltip />
+          <Tooltip shared />
           <Geom
             type="intervalStack"
             position="key*value"

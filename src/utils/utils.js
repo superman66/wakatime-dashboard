@@ -31,3 +31,24 @@ export function getLastData(data, day = 7) {
   }
   return lineChartData.reverse();
 }
+
+export function secondsFormat(seconds, showSeconds = true) {
+  let time = '';
+  if (seconds > -1) {
+    const hour = Math.floor(seconds / 3600);
+    const min = Math.floor(seconds / 60) % 60;
+    const sec = seconds % 60;
+
+    if (hour > 0) {
+      time = `${hour}h `;
+    }
+    if (min > 0) {
+      time += `${min}m `;
+    }
+
+    if (showSeconds) {
+      time += `${sec.toFixed(0)}s`;
+    }
+  }
+  return time;
+}

@@ -20,10 +20,9 @@ class Dashboard extends React.Component<Props> {
   componentDidMount() {
     this.fetchSummariesData().then(response => {
       const summariesData = getArrayFromGistData(response);
-      const lineChartData = getLastData(summariesData, 2);
-      console.log(lineChartData);
+      const chartData = getLastData(summariesData, 7);
       this.setState({
-        lineChartData
+        chartData
       });
     });
   }
@@ -34,17 +33,12 @@ class Dashboard extends React.Component<Props> {
     );
   }
   render() {
-    const { lineChartData } = this.state;
+    const { chartData } = this.state;
     return (
       <Panel className="dashboard" header={<h3>Dashboard</h3>}>
         <Row gutter={30} className="header">
           <Col xs={24}>
-            <StackedColumnChart chartData={lineChartData} />
-          </Col>
-        </Row>
-        <Row gutter={30}>
-          <Col xs={24}>
-            {/* <LineChart lineChartData={lineChartData} /> */}
+            <StackedColumnChart chartData={chartData} />
           </Col>
         </Row>
       </Panel>
