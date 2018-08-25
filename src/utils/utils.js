@@ -24,7 +24,10 @@ export function getLastData(data, day = 7) {
   const projectNames = {};
   const lineChartData = [];
 
-  for (let index = length - 1; index >= length - day; index--) {
+  for (let index = length - 1; index >= 0; index--) {
+    if (lineChartData.length >= day) {
+      break;
+    }
     // 每天的统计数据
     const summary = data[index].data[0];
     lineChartData.push(summary);
