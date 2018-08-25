@@ -43,7 +43,7 @@ class HeaderAvatar extends React.Component<Props> {
           href="https://wakatime.com/dashboard"
           target="_blank"
         >
-          Wakatime Dashboard
+          Original Wakatime Dashboard
         </Button>
       </div>
     );

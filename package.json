@@ -7,7 +7,7 @@
     "lib": "lib/"
   },
   "scripts": {
-    "dev": "webpack-dev-server --mode development --progress --hot --dev-tool source-map",
+    "dev": "webpack-dev-server --mode development --progress --hot --devtool source-map",
     "clear-dist": "rm -rf dist",
     "build-webpack": "NODE_ENV=production  webpack --mode production --progress && cp -R public/* ./dist/ ",
     "build": "npm run clear-dist && npm run build-webpack",

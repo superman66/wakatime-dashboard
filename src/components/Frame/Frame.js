@@ -153,6 +153,13 @@ class Frame extends React.Component<Props, State> {
                 >
                   Github
                 </Nav.Item>
+                <Nav.Item
+                  href="https://github.com/superman66/wakatime-sync"
+                  icon={<Icon icon="clock-o" />}
+                  target="_blank"
+                >
+                  Wakatime Sync Job
+                </Nav.Item>
               </Nav>
             </Sidenav.Body>
           </Sidenav>

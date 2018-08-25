@@ -3,9 +3,9 @@ import React from 'react';
 export default () => {
   return (
     <footer id="footer">
-      Power By{' '}
+      power by{' '}
       <a target="_blank" href="https://www.rsuitejs.com">
-        RSuite
+        rsuite
       </a>
     </footer>
   );
