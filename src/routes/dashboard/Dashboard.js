@@ -4,7 +4,6 @@ import Axios from 'axios';
 import moment from 'moment';
 import StackedColumnChart from './StackedColumnChart';
 import { getArrayFromGistData, getLastData, secondsFormat } from '../../utils/utils';
-import config from '../../config';
 import DatePicker from './DatePicker';
 
 type Props = {};
@@ -52,6 +51,7 @@ class Dashboard extends React.Component<Props> {
   }
 
   fetchSummariesData() {
+    const gistId = localStorage.getItem('gistId');
     const summaryData = JSON.parse(localStorage.getItem('wakatime'));
     let isLast = false;
     const lastDate = summaryData ? summaryData[summaryData.length - 1].data[0].range.date : null;
@@ -69,7 +69,7 @@ class Dashboard extends React.Component<Props> {
     if (summaryData && isLast) {
       return Promise.resolve(summaryData);
     } else {
-      return Axios.get(`https://api.github.com/gists/${config.gistId}`).then(response => {
+      return Axios.get(`https://api.github.com/gists/${gistId}`).then(response => {
         const summaryData = getArrayFromGistData(response.data);
         localStorage.setItem('wakatime', JSON.stringify(summaryData));
         return summaryData;

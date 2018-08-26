@@ -21,7 +21,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       formData: {
-        gistId: ''
+        gistId: '75f3b2ec23c7f69594ca3d9e8b7ea81d' // 默认的 gistId，用于演示
       }
     };
   }
@@ -58,7 +58,7 @@ class Login extends React.Component {
               <Form formValue={formData} onChange={this.handleFormChange}>
                 <FormGroup>
                   <ControlLabel>gistId</ControlLabel>
-                  <FormControl name="gistId" />
+                  <FormControl name="gistId" type="password"/>
                 </FormGroup>
                 <ButtonToolbar>
                   <Button

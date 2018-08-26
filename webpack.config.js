@@ -92,6 +92,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new HtmlwebpackPlugin({
       title: 'Wakatime Dashboard',
+      chunks: ['commons', 'app'],
       template: 'src/index.html',
       inject: true
     })
