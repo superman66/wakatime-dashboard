@@ -11,7 +11,8 @@
     "clear-dist": "rm -rf dist",
     "build-webpack": "NODE_ENV=production  webpack --mode production --progress && cp -R public/* ./dist/ ",
     "build": "npm run clear-dist && npm run build-webpack",
-    "publish-github": "node gh-pages.js",
+    "prepages": "npm run build",
+    "pages": "node gh-pages.js",
     "test": "karma start",
     "flow": "flow"
   },
@@ -30,7 +31,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/superman66/wakatime-sync.git"
+    "url": "https://github.com/superman66/wakatime-dashboard.git"
   },
   "dependencies": {
     "@antv/data-set": "^0.9.1",

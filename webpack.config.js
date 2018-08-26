@@ -19,13 +19,11 @@ module.exports = {
     port: 3900
   },
   entry: {
-    polyfills: './src/polyfills.js',
     app: './src/index.js'
   },
   output: {
-    filename: '[name].bundle.js?[hash]',
+    filename: '[name].[hash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
   },
   optimization: {
     splitChunks: {
@@ -94,7 +92,6 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new HtmlwebpackPlugin({
       title: 'Wakatime Dashboard',
-      chunks: ['polyfills', 'commons', 'app'],
       template: 'src/index.html',
       inject: true
     })

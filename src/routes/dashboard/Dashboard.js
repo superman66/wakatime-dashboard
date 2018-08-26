@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Row, Col, Icon, Panel } from 'rsuite';
+import { Row, Col, Icon, Panel, Loader } from 'rsuite';
 import Axios from 'axios';
 import moment from 'moment';
 import StackedColumnChart from './StackedColumnChart';
@@ -14,6 +14,7 @@ class Dashboard extends React.Component<Props> {
     super(props);
     this.state = {
       total: 0,
+      loading: true,
       selectedValue: 7,
       datePickerData: [
         {
@@ -39,8 +40,9 @@ class Dashboard extends React.Component<Props> {
       console.log(response);
       const chartData = getLastData(response, selectedValue);
       this.setState({
+        total: this.getTotal(chartData),
+        loading: false,
         chartData,
-        total: this.getTotal(chartData)
       });
     });
   }
@@ -51,7 +53,8 @@ class Dashboard extends React.Component<Props> {
 
   fetchSummariesData() {
     const summaryData = JSON.parse(localStorage.getItem('wakatime'));
-    const lastDate = summaryData[summaryData.length - 1].data[0].range.date;
+    let isLast = false;
+    const lastDate = summaryData ? summaryData[summaryData.length - 1].data[0].range.date : null;
     const currentDate = moment()
       .subtract(1, 'd')
       .format('YYYY-MM-DD');
@@ -61,7 +64,7 @@ class Dashboard extends React.Component<Props> {
      * 该部分的判断及本地存储逻辑需要优化，因为随着备份数据的增多，从 Gist 获取的数据越大
      * 一方面，网络请求的时间会变长，另一方面，可能 localStorage 放不下
      * **/
-    const isLast = moment(currentDate).isSame(lastDate);
+    isLast = lastDate ? moment(currentDate).isSame(lastDate) : false;
 
     if (summaryData && isLast) {
       return Promise.resolve(summaryData);
@@ -99,12 +102,13 @@ class Dashboard extends React.Component<Props> {
     );
   }
   render() {
-    const { chartData } = this.state;
+    const { loading, chartData } = this.state;
     return (
       <Panel className="dashboard" header={this.renderHeader()}>
         <Row gutter={30} className="header">
           <Col xs={24}>
             <StackedColumnChart chartData={chartData} />
+            {loading && <Loader center content="loading" />}
           </Col>
         </Row>
       </Panel>

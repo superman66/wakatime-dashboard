@@ -5,7 +5,7 @@ export default {
       indexRoute: {
         onEnter: (nextState, replace) => replace('/dashboard')
       },
-      childRoutes: [require('./main')]
+      childRoutes: [require('./main'), require('./login')]
     }
   ]
 };
