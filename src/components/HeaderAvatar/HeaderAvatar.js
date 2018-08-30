@@ -42,8 +42,9 @@ class HeaderAvatar extends React.Component<Props> {
           appearance="ghost"
           href="https://wakatime.com/dashboard"
           target="_blank"
+          className="origin-dashboard"
         >
-          Original Wakatime Dashboard
+          Wakatime Dashboard
         </Button>
       </div>
     );
