@@ -57,7 +57,7 @@ class Login extends React.Component {
             >
               <Form formValue={formData} onChange={this.handleFormChange}>
                 <FormGroup>
-                  <ControlLabel>gistId</ControlLabel>
+                  <ControlLabel>gistId(default value is for testing)</ControlLabel>
                   <FormControl name="gistId" type="password"/>
                 </FormGroup>
                 <ButtonToolbar>
