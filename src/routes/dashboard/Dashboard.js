@@ -3,10 +3,11 @@ import { Row, Col, Icon, Panel, Loader } from 'rsuite';
 import Axios from 'axios';
 import moment from 'moment';
 import StackedColumnChart from './StackedColumnChart';
-import { getArrayFromGistData, getLastData, secondsFormat } from '../../utils/utils';
+import { getLastData, secondsFormat } from '../../utils/utils';
 import DatePicker from './DatePicker';
 
 type Props = {};
+
 
 class Dashboard extends React.Component<Props> {
   constructor(props) {
@@ -27,6 +28,10 @@ class Dashboard extends React.Component<Props> {
         {
           value: 30,
           label: 'Last 30 Days'
+        },
+        {
+          value: 90,
+          label: 'Last 90 Days'
         }
       ],
       summariesData: []
@@ -35,7 +40,7 @@ class Dashboard extends React.Component<Props> {
 
   componentDidMount() {
     const { selectedValue } = this.state;
-    this.fetchSummariesData().then(response => {
+    this.fetchSummariesData(response => {
       console.log(response);
       const chartData = getLastData(response, selectedValue);
       this.setState({
@@ -50,7 +55,7 @@ class Dashboard extends React.Component<Props> {
     return data.reduce((x, y) => x + y.grand_total.total_seconds, 0);
   }
 
-  fetchSummariesData() {
+  fetchSummariesData(cb) {
     const gistId = localStorage.getItem('gistId');
     const summaryData = JSON.parse(localStorage.getItem('wakatime'));
     let isLast = false;
@@ -67,15 +72,47 @@ class Dashboard extends React.Component<Props> {
     isLast = lastDate ? moment(currentDate).isSame(lastDate) : false;
 
     if (summaryData && isLast) {
-      return Promise.resolve(summaryData);
+      cb && cb(summaryData);
     } else {
       return Axios.get(`https://api.github.com/gists/${gistId}`).then(response => {
-        const summaryData = getArrayFromGistData(response.data);
-        localStorage.setItem('wakatime', JSON.stringify(summaryData));
-        return summaryData;
+        let list = [],files = response.data.files,num = Object.keys(files).length - 1;
+        Object.keys(files).forEach(fileName=>{
+          let file = files[fileName];
+          if (file && file.type === 'application/json' && /summaries/.test(file.filename)) {
+            Axios.get(file.raw_url).then(response2 => {
+              list.push(response2.data);
+              if(list.length === num){
+                list = this.bubbleSort(list);
+                localStorage.setItem('wakatime', JSON.stringify(list));
+                cb && cb(list);
+              }
+            });
+          }
+        });
+
+        // const summaryData = getArrayFromGistData(response.data);
+       
       });
     }
-  }
+  };
+
+
+  swap(arr, indexA, indexB) {
+    [arr[indexA], arr[indexB]] = [arr[indexB], arr[indexA]];
+  };
+
+  bubbleSort(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      for (let j = 0; j < i; j++) {
+        if (new Date(arr[j].data[0].range.date).getTime() > new Date(arr[j + 1].data[0].range.date).getTime()) {
+          this.swap(arr, j, j + 1);
+        }
+      }
+    }
+  
+    return arr;
+  };
+
 
   handlePickerSelect = value => {
     const summaryData = JSON.parse(localStorage.getItem('wakatime'));
