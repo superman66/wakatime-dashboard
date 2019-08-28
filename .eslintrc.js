@@ -13,6 +13,7 @@ module.exports = {
   'plugins': [
     'babel'
   ],
+  "extends": "eslint:recommended",
   'parserOptions': {
     'ecmaVersion': 6,
     'sourceType': 'module',
