@@ -1,5 +1,3 @@
-// @flow
-
 import * as React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -30,16 +28,7 @@ const navs = [
   }
 ];
 
-type State = {
-  windowHeight: number,
-  expand: boolean
-};
-
-type Props = {
-  children: React.Node
-};
-
-class Frame extends React.Component<Props, State> {
+class Frame extends React.Component {
   resizeListenner = null;
   static contextTypes = {
     router: PropTypes.object
@@ -138,7 +127,7 @@ class Frame extends React.Component<Props, State> {
           <Sidenav.Header>
             <div className="header-hrand">
               <Link to="/">
-                <img src="/logo.png" alt="wakatime dashboard"/>
+                <img src="/logo.png" alt="wakatime dashboard" />
               </Link>
             </div>
           </Sidenav.Header>

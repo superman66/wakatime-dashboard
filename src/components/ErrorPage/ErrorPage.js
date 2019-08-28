@@ -1,5 +1,3 @@
-// flow
-
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import * as errors from '../../images/errors';

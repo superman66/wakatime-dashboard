@@ -1,12 +1,10 @@
-//@flow
-
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown, Popover, Whisper, Icon, Button } from 'rsuite';
 
 const Menu = ({ onSelect, onLogout }) => (
   <Dropdown.Menu onSelect={onSelect}>
-    <Dropdown.Item >退出当前ID</Dropdown.Item>
+    <Dropdown.Item>退出当前ID</Dropdown.Item>
   </Dropdown.Menu>
 );
 
@@ -16,13 +14,12 @@ const MenuPopover = ({ onSelect, ...rest }) => (
   </Popover>
 );
 
-type Props = {};
-class HeaderAvatar extends React.Component<Props> {
+class HeaderAvatar extends React.Component {
   static contextTypes = {
     router: PropTypes.object
   };
   trigger = null;
-  handleSelectMenu = (eventKey: any, event: SyntheticEvent<*>) => {
+  handleSelectMenu = (eventKey, event) => {
     if (this.trigger) {
       this.trigger.hide();
       this.handleLogout();
