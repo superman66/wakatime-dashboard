@@ -8,7 +8,6 @@ import DatePicker from './DatePicker';
 
 type Props = {};
 
-
 class Dashboard extends React.Component<Props> {
   constructor(props) {
     super(props);
@@ -46,7 +45,7 @@ class Dashboard extends React.Component<Props> {
       this.setState({
         total: this.getTotal(chartData),
         loading: false,
-        chartData,
+        chartData
       });
     });
   }
@@ -75,13 +74,15 @@ class Dashboard extends React.Component<Props> {
       cb && cb(summaryData);
     } else {
       return Axios.get(`https://api.github.com/gists/${gistId}`).then(response => {
-        let list = [],files = response.data.files,num = Object.keys(files).length - 1;
-        Object.keys(files).forEach(fileName=>{
+        let list = [],
+          files = response.data.files,
+          num = Object.keys(files).length - 1;
+        Object.keys(files).forEach(fileName => {
           let file = files[fileName];
           if (file && file.type === 'application/json' && /summaries/.test(file.filename)) {
             Axios.get(file.raw_url).then(response2 => {
               list.push(response2.data);
-              if(list.length === num){
+              if (list.length === num) {
                 list = this.bubbleSort(list);
                 localStorage.setItem('wakatime', JSON.stringify(list));
                 cb && cb(list);
@@ -91,28 +92,30 @@ class Dashboard extends React.Component<Props> {
         });
 
         // const summaryData = getArrayFromGistData(response.data);
-       
       });
     }
-  };
-
+  }
 
   swap(arr, indexA, indexB) {
     [arr[indexA], arr[indexB]] = [arr[indexB], arr[indexA]];
-  };
+  }
 
   bubbleSort(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       for (let j = 0; j < i; j++) {
-        if (new Date(arr[j].data[0].range.date).getTime() > new Date(arr[j + 1].data[0].range.date).getTime()) {
+        if (
+          new Date(arr[j].data ? arr[j].data[0].range.date : arr[j][0].range.date).getTime() >
+          new Date(
+            arr[j + 1].data ? arr[j + 1].data[0].range.date : arr[j + 1][0].range.date
+          ).getTime()
+        ) {
           this.swap(arr, j, j + 1);
         }
       }
     }
-  
-    return arr;
-  };
 
+    return arr;
+  }
 
   handlePickerSelect = value => {
     const summaryData = JSON.parse(localStorage.getItem('wakatime'));
