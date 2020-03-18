@@ -19,15 +19,12 @@
 //   return data;
 // }
 
-export function getLastData(data, day = 7) {
+export function getLastData(data) {
   const length = data.length;
   const projectNames = {};
   const lineChartData = [];
 
   for (let index = length - 1; index >= 0; index--) {
-    if (lineChartData.length >= day) {
-      break;
-    }
     // 每天的统计数据
     const summary = data[index].data ? data[index].data[0] : data[index][0];
     lineChartData.push(summary);
@@ -54,4 +51,8 @@ export function secondsFormat(seconds, showSeconds = true) {
     }
   }
   return time;
+}
+
+export function swap(arr, indexA, indexB) {
+  [arr[indexA], arr[indexB]] = [arr[indexB], arr[indexA]];
 }

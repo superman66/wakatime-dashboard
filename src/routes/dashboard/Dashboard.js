@@ -95,6 +95,7 @@ class Dashboard extends React.Component {
           new Date(
             arr[j + 1].data ? arr[j + 1].data[0].range.date : arr[j + 1][0].range.date
           ).getTime()
+
         ) {
           swap(arr, j, j + 1);
         }

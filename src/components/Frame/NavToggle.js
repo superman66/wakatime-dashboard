@@ -1,5 +1,5 @@
-// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Navbar, Nav, Dropdown, Icon } from 'rsuite';
 
 const styles = {
@@ -15,12 +15,12 @@ const styles = {
   }
 };
 
-type Props = {
-  expand?: boolean,
-  onChange?: () => void
+const propTypes = {
+  expand: PropTypes.bool,
+  onChange: PropTypes.func
 };
 
-const NavToggle = ({ expand, onChange }: Props) => {
+const NavToggle = ({ expand, onChange }) => {
   return (
     <Navbar appearance="subtle" className="nav-toggle">
       <Navbar.Body>
@@ -34,4 +34,5 @@ const NavToggle = ({ expand, onChange }: Props) => {
   );
 };
 
+NavToggle.propTypes = propTypes;
 export default NavToggle;
