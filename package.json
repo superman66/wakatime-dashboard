@@ -110,7 +110,7 @@
     "svg-sprite-loader": "^3.7.1",
     "transform-loader": "^0.2.3",
     "url-loader": "^0.5.7",
-    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-bundle-analyzer": "^3.6.1",
     "webpack-dev-server": "^3.1.4",
     "why-did-you-update": "^0.1.1",
     "webpack": "^4.20.2",
