@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --progress --hot --devtool source-map",
     "clear-dist": "rm -rf dist",
-    "build-webpack": "NODE_ENV=production  webpack --mode production --progress && cp -R public/* ./dist/ ",
+    "build-webpack": "cross-env NODE_ENV=production  webpack --mode production --progress && cp -R public/* ./dist/ ",
     "build": "npm run clear-dist && npm run build-webpack",
     "prepages": "npm run build",
     "pages": "node gh-pages.js",
@@ -76,6 +76,7 @@
     "chai": "^3.5.0",
     "child-process-promise": "^2.0.2",
     "compression-webpack-plugin": "^1.0.1",
+    "cross-env": "^7.0.2",
     "css-loader": "^0.28.11",
     "cssnano": "^3.10.0",
     "cz-conventional-changelog": "^2.1.0",
