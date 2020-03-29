@@ -1,6 +1,6 @@
 {
   "name": "wakatime-dashboard",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Wakatime dashboard which fetching data from gist",
   "main": "lib/index.js",
   "directories": {
