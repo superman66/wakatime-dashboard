@@ -1,4 +1,5 @@
-@import '~rsuite/styles/less/index';
+@import '~rsuite/lib/styles/index';
+@import '~rsuite/lib/styles/themes/dark/index.less';
 
 @import '../components/Frame/styles.less';
 @import '../components/ErrorPage/styles.less';
@@ -7,11 +8,7 @@
 @import '../routes/login/styles.less';
 
 //rewrite base color
-@base-color: #34c3ff;
-
-body {
-  background: #f7f7fa;
-}
+@base-color: #3498ff;
 
 .rs-sidebar {
   position: fixed;
@@ -21,7 +18,6 @@ body {
 .page-container {
   padding-left: 260px;
   transition: padding 0.5s;
-  background: #fff;
   &.container-full {
     padding-left: 60px;
   }

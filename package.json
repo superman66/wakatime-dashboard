@@ -7,7 +7,7 @@
     "lib": "lib/"
   },
   "scripts": {
-    "dev": "webpack-dev-server --mode development --progress --hot --devtool source-map",
+    "start": "webpack-dev-server --mode development --progress --hot --devtool source-map",
     "clear-dist": "rm -rf dist",
     "build-webpack": "cross-env NODE_ENV=production  webpack --mode production --progress && cp -R public/* ./dist/ ",
     "build": "npm run clear-dist && npm run build-webpack",
@@ -39,11 +39,11 @@
     "classnames": ">=2.0.0",
     "moment": "^2.20.1",
     "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-intl": "^2.4.0",
     "react-router": "3.2.0",
-    "rsuite": "^3.2.2",
+    "rsuite": "^4.3.3",
     "rsuite-utils": "^1.0.0"
   },
   "peerDependencies": {

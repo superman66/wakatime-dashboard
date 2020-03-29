@@ -152,7 +152,6 @@ class Frame extends React.Component {
               </Nav>
             </Sidenav.Body>
           </Sidenav>
-          <NavToggle expand={expand} onChange={this.handleToggle} />
         </Sidebar>
 
         <Container className={containerClasses}>
