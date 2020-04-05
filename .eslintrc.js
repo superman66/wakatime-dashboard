@@ -9,8 +9,9 @@ module.exports = {
     browser: true,
     es6: true
   },
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   parser: 'babel-eslint',
-  plugins: ['babel'],
+  plugins: ['babel', 'react'],
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
@@ -32,8 +33,6 @@ module.exports = {
     'prefer-spread': ERROR, //首选展开运算
     'comma-dangle': OFF, //不允许或强制在对象字面量或者数组属性的结尾使用逗号
     'padded-blocks': OFF, //规定代码块前后是否要加空行
-    'prefer-const': OFF,
-    'no-var': OFF,
-    'one-var': OFF
+    'prefer-const': OFF
   }
 };

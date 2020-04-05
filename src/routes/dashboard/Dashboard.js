@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Row, Col, Icon, Panel, Loader } from 'rsuite';
+import { Row, Col, Panel, Grid, SelectPicker } from 'rsuite';
 import Axios from 'axios';
-import StackedColumnChart from './StackedColumnChart';
 import { getLastData, secondsFormat, swap } from '../../utils/utils';
-import DatePicker from './DatePicker';
+import StackedBarWithLineChart from './StackedBarWithLineChart';
+import { getWakatimeData } from './utils';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
           label: 'Last 90 Days'
         }
       ],
-      chartData: []
+      summaryData: [] // 柱状折线图的summary数据
     };
   }
 
@@ -74,11 +74,13 @@ class Dashboard extends React.Component {
           return sum;
         }, []);
 
+        const { codingActivityData } = getWakatimeData(data);
+        console.log(getWakatimeData(data));
         const chartData = getLastData(data);
         this.setState({
           total: this.getTotal(chartData),
           loading: false,
-          chartData
+          chartData: codingActivityData
         });
       });
   }
@@ -95,7 +97,6 @@ class Dashboard extends React.Component {
           new Date(
             arr[j + 1].data ? arr[j + 1].data[0].range.date : arr[j + 1][0].range.date
           ).getTime()
-
         ) {
           swap(arr, j, j + 1);
         }
@@ -118,8 +119,12 @@ class Dashboard extends React.Component {
       <h3>
         <span>{secondsFormat(total)}</span>
         &nbsp;
-        <DatePicker
+        <SelectPicker
           data={datePickerData}
+          searchable={false}
+          cleanable={false}
+          appearance="subtle"
+          value={selectedValue}
           selectedValue={selectedValue}
           onSelect={this.handlePickerSelect}
         />
@@ -131,12 +136,24 @@ class Dashboard extends React.Component {
     const { loading, chartData } = this.state;
     return (
       <Panel className="dashboard" header={this.renderHeader()}>
-        <Row gutter={30} className="header">
-          <Col xs={24}>
-            <StackedColumnChart chartData={chartData} />
-            {loading && <Loader center content="loading" />}
-          </Col>
-        </Row>
+        <Grid fluid>
+          <Row gutter={16}>
+            <Col xs={12}>
+              <div className="show-col">
+                <StackedBarWithLineChart />
+              </div>
+            </Col>
+            <Col xs={12}>
+              <div className="show-col">xs={4}</div>
+            </Col>
+            <Col xs={12}>
+              <div className="show-col">xs={4}</div>
+            </Col>
+            <Col xs={12}>
+              <div className="show-col">xs={4}</div>
+            </Col>
+          </Row>
+        </Grid>
       </Panel>
     );
   }
